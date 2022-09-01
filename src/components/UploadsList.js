@@ -11,6 +11,19 @@ const getNameOfFile = (path) => {
 };
 
 const UploadsList = ({ medias }) => {
+  const onDelete = (id) => {
+    axios
+      .delete(`${BACKEND_URI}/api/v1/media/all/delete/${id}`)
+      .then((success) => {
+        // alert("Submitted successfully");
+        window.location.reload()
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error happened!");
+      });
+    console.log(id, "iddddddd");
+  };
   return (
     <div className="row">
       <div className="col-md-12">
@@ -51,6 +64,10 @@ const UploadsList = ({ medias }) => {
                               }
                             >
                               Download
+                            </button>
+                            <br></br>
+                            <button onClick={() => onDelete(media._id)}>
+                              Delete
                             </button>
                           </>
                         );
